@@ -1,4 +1,4 @@
-package com.example.dva232.ui.theme
+package com.example.dva232.view.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

@@ -1,13 +1,13 @@
-package com.example.dva232.ui.navigation
+package com.example.dva232.view.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.dva232.ui.pages.ConvertPage
-import com.example.dva232.ui.pages.CurrenciesPage
-import com.example.dva232.ui.util.currencyList
+import com.example.dva232.view.pages.ConvertPage
+import com.example.dva232.view.pages.CurrenciesPage
+import com.example.dva232.view.util.currencyList
 
 @Composable
 fun NavigationGraph(navController: NavHostController, modifier: Modifier = Modifier) {

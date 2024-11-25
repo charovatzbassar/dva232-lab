@@ -1,4 +1,4 @@
-package com.example.dva232.ui.theme
+package com.example.dva232.view.theme
 
 import androidx.compose.ui.graphics.Color
 

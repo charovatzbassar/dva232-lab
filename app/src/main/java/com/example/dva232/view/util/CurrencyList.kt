@@ -1,4 +1,4 @@
-package com.example.dva232.ui.util
+package com.example.dva232.view.util
 
 val currencyList: List<Currency> = listOf(
     Currency("EUR", 1.0),

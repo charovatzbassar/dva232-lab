@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.example.dva232.ui.navigation.NavigationComposable
-import com.example.dva232.ui.theme.DVA232Theme
+import com.example.dva232.view.navigation.NavigationComposable
+import com.example.dva232.view.theme.DVA232Theme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,4 +1,4 @@
-package com.example.dva232.ui.navigation
+package com.example.dva232.view.navigation
 
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Edit

@@ -19,9 +19,10 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.dva232.view.composables.TableCell
 import com.example.dva232.view.util.Currency
+import com.example.dva232.view.util.currencyList
 
 @Composable
-fun CurrenciesPage(currencies: List<Currency>, navController: NavController) {
+fun CurrenciesPage() {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -38,7 +39,7 @@ fun CurrenciesPage(currencies: List<Currency>, navController: NavController) {
         }
 
         LazyColumn {
-            items(currencies) { currency ->
+            items(currencyList) { currency ->
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()

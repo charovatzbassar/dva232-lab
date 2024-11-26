@@ -12,7 +12,7 @@ import com.example.dva232.view.util.currencyList
 @Composable
 fun NavigationGraph(navController: NavHostController, modifier: Modifier = Modifier) {
     NavHost(navController, startDestination = BottomNavItem.Convert.route, modifier = modifier) {
-        composable(BottomNavItem.Convert.route) { ConvertPage(currencyList, navController) }
-        composable(BottomNavItem.Currencies.route) { CurrenciesPage(currencyList, navController) }
+        composable(BottomNavItem.Convert.route) { ConvertPage() }
+        composable(BottomNavItem.Currencies.route) { CurrenciesPage() }
     }
 }

@@ -11,15 +11,15 @@ import androidx.navigation.compose.rememberNavController
 fun NavigationComposable() {
     val navController = rememberNavController()
 
-    when (LocalConfiguration.current.orientation) {
-        else -> {
+//    when (LocalConfiguration.current.orientation) {
+//        else -> {
             Scaffold(
                 bottomBar = { BottomNavigationBar(navController) }
             ) { innerPadding ->
                 NavigationGraph(navController = navController, modifier = Modifier.padding(innerPadding))
             }
-        }
-    }
+//        }
+//    }
 
 
 }

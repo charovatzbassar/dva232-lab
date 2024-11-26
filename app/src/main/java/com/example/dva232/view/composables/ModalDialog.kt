@@ -40,11 +40,11 @@ fun ModalDialog(isDialogOpen: Boolean, onDismissRequest: () -> Unit, text: Strin
             ) {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.SpaceBetween,
+                    verticalArrangement = Arrangement.Center,
                     modifier = Modifier.fillMaxSize()
                 ) {
                     Text(text = text, style = MaterialTheme.typography.titleMedium)
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.height(40.dp))
                     Button(onClick = { onDismissRequest() }) {
                         Text("Close")
                     }

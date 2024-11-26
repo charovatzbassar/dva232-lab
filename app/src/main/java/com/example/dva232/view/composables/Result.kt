@@ -20,13 +20,10 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun Result(resultValue: Double) {
-    val rowHeight = if (LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-        40.dp
-    } else 100.dp
+    val isLandscape = LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
 
-    val fontSize = if (LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-        20.sp
-    } else 24.sp
+    val rowHeight = if (isLandscape) 40.dp else 100.dp
+    val fontSize = if (isLandscape) 20.sp else 24.sp
 
     Row(
         modifier = Modifier

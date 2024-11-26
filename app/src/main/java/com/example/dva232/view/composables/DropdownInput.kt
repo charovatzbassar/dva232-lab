@@ -2,6 +2,7 @@ package com.example.dva232.view.composables
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
@@ -32,15 +33,16 @@ fun DropdownInput(
     var isDropdownExpanded by remember { mutableStateOf(false) }
     val textFieldSize = remember { mutableStateOf(androidx.compose.ui.geometry.Size.Zero) }
 
-    Column(modifier = modifier) { // Use Column to stack the text field and dropdown menu
+    Column(modifier = modifier) {
         OutlinedTextField(
             value = selectedOption.value,
             onValueChange = { },
             modifier = Modifier
                 .onGloballyPositioned { coordinates ->
-                    textFieldSize.value = coordinates.size.toSize() // Get size of the text field
+                    textFieldSize.value = coordinates.size.toSize()
                 }
-                .clickable { isDropdownExpanded = true },
+                .clickable { isDropdownExpanded = true }
+                .fillMaxWidth(),
             label = { Text(text) },
             readOnly = true,
             trailingIcon = {
@@ -56,7 +58,7 @@ fun DropdownInput(
             expanded = isDropdownExpanded,
             onDismissRequest = { isDropdownExpanded = false },
             modifier = Modifier
-                .width(with(LocalDensity.current) { textFieldSize.value.width.toDp() }) // Match width of the text field
+                .width(with(LocalDensity.current) { textFieldSize.value.width.toDp() })
         ) {
             options.forEach { option ->
                 DropdownMenuItem(

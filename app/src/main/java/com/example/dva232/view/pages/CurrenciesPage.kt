@@ -15,12 +15,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.dva232.view.composables.DropdownInput
 import com.example.dva232.view.composables.TableCell
 import com.example.dva232.view.util.currencyList
+import com.example.dva232.viewModel.AppViewModel
 
 @Composable
 fun CurrenciesPage() {
+    val appViewModel: AppViewModel =
+        viewModel(factory = AppViewModel.Factory)
 
     val isPortrait = LocalConfiguration.current.orientation == Configuration.ORIENTATION_PORTRAIT
 

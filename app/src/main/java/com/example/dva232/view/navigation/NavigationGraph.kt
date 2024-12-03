@@ -7,12 +7,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.dva232.view.pages.ConvertPage
 import com.example.dva232.view.pages.CurrenciesPage
-import com.example.dva232.view.util.currencyList
+import com.example.dva232.view.util.Currency
 
 @Composable
-fun NavigationGraph(navController: NavHostController, modifier: Modifier = Modifier) {
+fun NavigationGraph(navController: NavHostController, modifier: Modifier = Modifier, currencies: List<Currency>, baseCurrency: String) {
     NavHost(navController, startDestination = BottomNavItem.Convert.route, modifier = modifier) {
-        composable(BottomNavItem.Convert.route) { ConvertPage() }
-        composable(BottomNavItem.Currencies.route) { CurrenciesPage() }
+        composable(BottomNavItem.Convert.route) { ConvertPage(currencies) }
+        composable(BottomNavItem.Currencies.route) { CurrenciesPage(currencies = currencies, baseCurrency = baseCurrency) }
     }
 }

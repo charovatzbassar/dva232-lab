@@ -27,10 +27,10 @@ import androidx.compose.ui.unit.dp
 import com.example.dva232.view.composables.DropdownInput
 import com.example.dva232.view.composables.ModalDialog
 import com.example.dva232.view.composables.Result
-import com.example.dva232.view.util.currencyList
+import com.example.dva232.view.util.Currency
 
 @Composable
-fun ConvertPage() {
+fun ConvertPage(currencies: List<Currency>) {
     var result by remember { mutableDoubleStateOf(0.0) }
     var isResultInvalid by remember { mutableStateOf(false) }
 
@@ -38,7 +38,7 @@ fun ConvertPage() {
     val selectedFromCurrency = remember { mutableStateOf("EUR") }
     val selectedToCurrency = remember { mutableStateOf("SEK") }
 
-    val options = currencyList.map { c -> c.code }
+    val options = currencies.map { c -> c.code }
 
     Column(
         modifier = Modifier
@@ -118,8 +118,8 @@ fun ConvertPage() {
                         return@Button
                     }
                         val fromCurrency =
-                            currencyList.find { c -> c.code == selectedFromCurrency.value }
-                        val toCurrency = currencyList.find { c -> c.code == selectedToCurrency.value }
+                            currencies.find { c -> c.code == selectedFromCurrency.value }
+                        val toCurrency = currencies.find { c -> c.code == selectedToCurrency.value }
 
                         result = (toCurrency!!.rate * amount.toDouble()) / fromCurrency!!.rate
                 } catch (e: NumberFormatException) {

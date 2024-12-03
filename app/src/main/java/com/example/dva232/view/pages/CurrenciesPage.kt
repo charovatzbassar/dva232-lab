@@ -18,14 +18,11 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.dva232.view.composables.DropdownInput
 import com.example.dva232.view.composables.TableCell
-import com.example.dva232.view.util.currencyList
+import com.example.dva232.view.util.Currency
 import com.example.dva232.viewModel.AppViewModel
 
 @Composable
-fun CurrenciesPage() {
-    val appViewModel: AppViewModel =
-        viewModel(factory = AppViewModel.Factory)
-
+fun CurrenciesPage(currencies: List<Currency>, baseCurrency: String) {
     val isPortrait = LocalConfiguration.current.orientation == Configuration.ORIENTATION_PORTRAIT
 
     Column(
@@ -33,6 +30,14 @@ fun CurrenciesPage() {
             .padding(20.dp)
             .fillMaxWidth()
     ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Color.LightGray)
+                .padding(8.dp)
+        ) {
+            TableCell("Base Currency: $baseCurrency", Modifier.weight(1f))
+        }
 
         if (isPortrait) {
             Row(
@@ -47,7 +52,7 @@ fun CurrenciesPage() {
         }
 
         LazyColumn {
-            items(currencyList) { currency ->
+            items(currencies) { currency ->
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()

@@ -6,18 +6,10 @@ import androidx.compose.runtime.MutableState
 import com.google.android.gms.location.FusedLocationProviderClient
 import java.util.Currency
 import java.util.Locale
-import kotlin.math.roundToLong
 
 class Functions {
     companion object {
-        private fun recalculateRates(currencies: MutableList<com.example.dva232.view.util.Currency>, newCurrencyCode: String) {
-            val newCurrency = currencies.find { currency -> currency.code == newCurrencyCode }
-            currencies.forEach { currency ->
-                run {
-                    currency.rate = String.format("%.3f", currency.rate / newCurrency!!.rate).toDouble()
-                }
-            }
-        }
+
 
         fun getCurrencyForLocation(
         fusedLocationClient: FusedLocationProviderClient,
@@ -37,7 +29,7 @@ class Functions {
                         if (!countryCode.isNullOrEmpty()) {
                             val currency = Currency.getInstance(Locale("", countryCode))
                             currencyCode.value = currency.currencyCode
-                            this.recalculateRates(currencies, currencyCode.value)
+                            this.recalculateRates(currencies, currencyCode)
                         } else {
                             currencyCode.value = "Unknown"
                         }
@@ -46,5 +38,16 @@ class Functions {
             }
     }
 
+         fun recalculateRates(currencies: MutableList<com.example.dva232.view.util.Currency>, newCurrencyState: MutableState<String>) {
+            val newCurrency = currencies.find { currency -> currency.code == newCurrencyState.value }
+            currencies.forEach { currency ->
+                run {
+                    currency.rate = String.format("%.3f", currency.rate / newCurrency!!.rate).toDouble()
+                }
+            }
+        }
+
     }
+
+
 }

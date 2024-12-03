@@ -63,7 +63,7 @@ fun NavigationComposable() {
     Scaffold(
         bottomBar = { BottomNavigationBar(navController) }
     ) { innerPadding ->
-        NavigationGraph(navController = navController, modifier = Modifier.padding(innerPadding), currencies = appViewModel.currencies, baseCurrency = baseCurrencyCode.value)
+        NavigationGraph(navController = navController, modifier = Modifier.padding(innerPadding), currencies = appViewModel.currencies, baseCurrencyState = baseCurrencyCode)
     }
 
 

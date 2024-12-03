@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -22,7 +23,7 @@ import com.example.dva232.view.util.Currency
 import com.example.dva232.viewModel.AppViewModel
 
 @Composable
-fun CurrenciesPage(currencies: List<Currency>, baseCurrency: String) {
+fun CurrenciesPage(currencies: List<Currency>, baseCurrencyState: MutableState<String>) {
     val isPortrait = LocalConfiguration.current.orientation == Configuration.ORIENTATION_PORTRAIT
 
     Column(
@@ -36,7 +37,7 @@ fun CurrenciesPage(currencies: List<Currency>, baseCurrency: String) {
                 .background(Color.LightGray)
                 .padding(8.dp)
         ) {
-            TableCell("Base Currency: $baseCurrency", Modifier.weight(1f))
+            TableCell("Base Currency: ${baseCurrencyState.value}", Modifier.weight(1f))
         }
 
         if (isPortrait) {

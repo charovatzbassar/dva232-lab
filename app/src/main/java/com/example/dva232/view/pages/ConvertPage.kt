@@ -2,9 +2,12 @@ package com.example.dva232.view.pages
 
 import android.app.Activity
 import android.content.res.Configuration
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
@@ -14,11 +17,13 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableDoubleStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
@@ -28,15 +33,17 @@ import com.example.dva232.view.composables.DropdownInput
 import com.example.dva232.view.composables.ModalDialog
 import com.example.dva232.view.composables.Result
 import com.example.dva232.view.util.Currency
+import com.example.dva232.view.util.Functions
 
 @Composable
-fun ConvertPage(currencies: List<Currency>) {
+fun ConvertPage(currencies: List<Currency>, baseCurrencyState: MutableState<String>) {
     var result by remember { mutableDoubleStateOf(0.0) }
     var isResultInvalid by remember { mutableStateOf(false) }
 
     var amount by remember { mutableStateOf("") }
     val selectedFromCurrency = remember { mutableStateOf("EUR") }
     val selectedToCurrency = remember { mutableStateOf("SEK") }
+    val baseCurrency = remember { mutableStateOf(baseCurrencyState.value) }
 
     val options = currencies.map { c -> c.code }
 
@@ -133,8 +140,61 @@ fun ConvertPage(currencies: List<Currency>) {
             Text("Submit")
         }
 
+        when (LocalConfiguration.current.orientation) {
+            Configuration.ORIENTATION_PORTRAIT -> {
+                Row {
+                    DropdownInput(
+                        text = "Base Currency",
+                        options = options,
+                        selectedOption = baseCurrency,
+                        modifier = Modifier.weight(1f).padding(top = 16.dp)
+                    )
 
-        ModalDialog(text = "This amount is invalid", isDialogOpen = isResultInvalid, onDismissRequest = {
+                }
+                Button(
+                    onClick = {
+                        Functions.recalculateRates(currencies.toMutableList(), baseCurrency)
+                        baseCurrencyState.value = baseCurrency.value
+                    },
+                    modifier = Modifier.padding(16.dp).fillMaxWidth()
+                ) {
+                    Text("Change Currency")
+                }
+            }
+
+            else -> {
+                Row(
+                    modifier = Modifier.height(90.dp)
+                ) {
+                    DropdownInput(
+                        text = "Base Currency",
+                        options = options,
+                        selectedOption = baseCurrency,
+                        modifier = Modifier.weight(1f).padding(top = 16.dp)
+                    )
+                    Button(
+                        onClick = {
+                            if (baseCurrency.value == "Unknown") {
+                                isResultInvalid = true
+                                return@Button
+                            }
+                            Functions.recalculateRates(currencies.toMutableList(), baseCurrency)
+                            baseCurrencyState.value = baseCurrency.value
+                        },
+                        modifier = Modifier.padding(16.dp).fillMaxHeight()
+                    ) {
+                        Text("Change Currency")
+                    }
+                }
+
+            }
+
+        }
+
+
+
+
+        ModalDialog(text = "This action is invalid", isDialogOpen = isResultInvalid, onDismissRequest = {
             isResultInvalid = false
         })
 

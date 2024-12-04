@@ -16,7 +16,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
-import com.example.dva232.view.util.Currency
 import com.example.dva232.view.util.Functions
 import com.example.dva232.viewModel.AppViewModel
 import com.google.android.gms.location.LocationServices
@@ -31,17 +30,15 @@ fun NavigationComposable() {
     val context = LocalContext.current
     val fusedLocationClient = remember { LocationServices.getFusedLocationProviderClient(context) }
     val geocoder = remember { Geocoder(context, Locale.getDefault()) }
-    val country = remember { mutableStateOf("Unknown") }
     val baseCurrencyCode = remember { mutableStateOf("Unknown") }
 
     val permissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission(),
         onResult = { granted ->
             if (granted) {
-                Functions.getCurrencyForLocation(fusedLocationClient, geocoder, country, baseCurrencyCode, appViewModel.currencies)
+                Functions.getCurrencyForLocation(fusedLocationClient, geocoder, baseCurrencyCode, appViewModel.currencies)
 
             } else {
-                country.value = "Permission denied"
                 baseCurrencyCode.value = "Unknown"
             }
         }
@@ -52,7 +49,7 @@ fun NavigationComposable() {
                 context, Manifest.permission.ACCESS_FINE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
         ) {
-            Functions.getCurrencyForLocation(fusedLocationClient, geocoder, country, baseCurrencyCode, appViewModel.currencies)
+            Functions.getCurrencyForLocation(fusedLocationClient, geocoder, baseCurrencyCode, appViewModel.currencies)
         } else {
             permissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         }

@@ -1,4 +1,4 @@
-package com.example.dva232.model
+package com.example.dva232.viewModel
 
 
 import com.example.dva232.view.util.Constants
@@ -8,7 +8,6 @@ import com.example.dva232.viewModel.services.FixerService
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
 import retrofit2.converter.scalars.ScalarsConverterFactory

@@ -9,22 +9,16 @@ import java.util.Locale
 
 class Functions {
     companion object {
-
-
         fun getCurrencyForLocation(
-        fusedLocationClient: FusedLocationProviderClient,
-        geocoder: Geocoder,
-        country: MutableState<String>,
-        currencyCode: MutableState<String>,
-        currencies: MutableList<com.example.dva232.view.util.Currency>
+            fusedLocationClient: FusedLocationProviderClient,
+            geocoder: Geocoder,
+            currencyCode: MutableState<String>,
+            currencies: MutableList<com.example.dva232.view.util.Currency>
         ) {
             fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
                 location?.let {
                     val addressList = geocoder.getFromLocation(it.latitude, it.longitude, 1)
                     if (!addressList.isNullOrEmpty()) {
-                        val countryName = addressList[0].countryName ?: "Unknown"
-                        country.value = countryName
-
                         val countryCode = addressList[0].countryCode
                         if (!countryCode.isNullOrEmpty()) {
                             val currency = Currency.getInstance(Locale("", countryCode))
@@ -36,7 +30,7 @@ class Functions {
                     }
                 }
             }
-    }
+        }
 
          fun recalculateRates(currencies: MutableList<com.example.dva232.view.util.Currency>, newCurrencyState: MutableState<String>) {
             val newCurrency = currencies.find { currency -> currency.code == newCurrencyState.value }
